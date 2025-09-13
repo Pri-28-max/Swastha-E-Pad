@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swastha Pad</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe6f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .page {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #ff6699;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e65c87;
+    }
+    h1, h2, h3 {
+      color: #cc3366;
+      text-align: center;
+    }
+    .suggestion {
+      margin-top: 15px;
+      padding: 10px;
+      background: #fff0f5;
+      border-left: 5px solid #ff6699;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Page 1 -->
+    <div id="page1" class="page active">
+      <h1>Swastha Pad</h1>
+      <h3>"Har Mahine Ki Saheli"</h3>
+      <button onclick="nextPage(2)">Next</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="page">
+      <h2>Select Language</h2>
+      <select id="language">
+        <option value="english">English</option>
+        <option value="hindi">हिन्दी</option>
+        <option value="marathi">मराठी</option>
+      </select>
+      <br />
+      <button onclick="nextPage(3)">Next</button>
+    </div>
+
+    <!-- Page 3 -->
+    <div id="page3" class="page">
+      <h2>Enter Your Details</h2>
+      <input type="text" id="name" placeholder="Your Name" /><br /><br />
+      <input type="email" id="email" placeholder="Your Email" /><br /><br />
+      <button onclick="nextPage(4)">Next</button>
+    </div>
+
+    <!-- Page 4 -->
+    <div id="page4" class="page">
+      <h2>What issues are you facing?</h2>
+      <select id="problem">
+        <option value="pcod">PCOD / PCOS</option>
+        <option value="cramps">Cramps (Dysmenorrhea)</option>
+        <option value="heavy">Heavy Bleeding (Menorrhagia)</option>
+        <option value="bloating">Bloating / Over Floating</option>
+        <option value="irregular">Irregular Periods</option>
+        <option value="pms">Premenstrual Syndrome (PMS)</option>
+        <option value="mood">Mood Swings / Stress</option>
+      </select><br /><br />
+      <label>Since how many days?</label><br />
+      <input type="number" id="days" min="1" placeholder="e.g. 2" /><br /><br />
+      <button onclick="showSuggestion()">Get Suggestion</button>
+    </div>
+
+    <!-- Page 5 -->
+    <div id="page5" class="page">
+      <h2>Your Suggestions</h2>
+      <div id="suggestionBox" class="suggestion"></div>
+      <br />
+      <button onclick="nextPage(1)">Start Again</button>
+    </div>
+  </div>
+
+  <script>
+    function nextPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + n).classList.add('active');
+    }
+
+    function showSuggestion() {
+      let problem = document.getElementById('problem').value;
+      let suggestion = '';
+
+      if (problem === 'pcod') {
+        suggestion = `🌱 Add flax seeds, chia seeds, and leafy vegetables<br/>
+🧘‍♀️ Yoga: Butterfly pose, Surya Namaskar<br/>
+🚶‍♀️ Daily 30 min walking/exercise<br/>
+❌ Avoid sugar, fried, processed foods<br/>
+👩‍⚕️ If >3 months, consult gynecologist`;
+      } else if (problem === 'cramps') {
+        suggestion = `🍵 Ginger / chamomile tea<br/>
+♨️ Hot water bag<br/>
+🧘‍♀️ Yoga: Child’s Pose, Cat-Cow<br/>
+🥗 Eat light, avoid oily food<br/>
+😴 Proper rest`;
+      } else if (problem === 'heavy') {
+        suggestion = `🥭 Iron-rich foods (spinach, beetroot, dates)<br/>
+💧 Drink plenty of water<br/>
+🧘‍♀️ Yoga: Reclining Bound Angle Pose<br/>
+❌ Avoid caffeine & spicy food<br/>
+👩‍⚕️ If persists >2 cycles, consult doctor`;
+      } else if (problem === 'bloating') {
+        suggestion = `💧 Warm water<br/>
+🍵 Fennel / peppermint tea<br/>
+🚶‍♀️ Light walking aids digestion<br/>
+🥦 Fiber-rich vegetables<br/>
+❌ Reduce salt & soda drinks`;
+      } else if (problem === 'irregular') {
+        suggestion = `🧘‍♀️ Yoga: Kapalbhati, Anulom Vilom<br/>
+🌱 Balanced diet, avoid junk food<br/>
+🚶‍♀️ Regular sleep + exercise<br/>
+👩‍⚕️ Doctor if >6 months irregularity`;
+      } else if (problem === 'pms') {
+        suggestion = `🥭 Eat fruits, nuts & omega-3 rich food<br/>
+🧘‍♀️ Yoga: Cobra Pose, Bridge Pose<br/>
+🚶‍♀️ 20–30 min daily walk<br/>
+🍵 Herbal teas (ginger / cinnamon)<br/>
+❌ Avoid too much coffee`;
+      } else if (problem === 'mood') {
+        suggestion = `🎶 Calming music<br/>
+🧘‍♀️ Meditation 10 mins<br/>
+🍫 Small piece dark chocolate<br/>
+☀️ Sunlight & outdoor walk<br/>
+💤 Good sleep routine`;
+      }
+
+      document.getElementById('suggestionBox').innerHTML = suggestion;
+      nextPage(5);
+    }
+  </script>
+</body>
+</html>
